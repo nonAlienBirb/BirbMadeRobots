@@ -27,3 +27,4 @@ While any motor control module can be used, I chose the L298n motor driver, so t
 - `keyboard`
 
 ## Schematic
+_will be added here soon_
