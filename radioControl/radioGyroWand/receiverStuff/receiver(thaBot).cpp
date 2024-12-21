@@ -1,5 +1,4 @@
 #include <SPI.h>
-#include <printf.h>
 #include <RF24.h>
 
 #define CE_PIN 7
