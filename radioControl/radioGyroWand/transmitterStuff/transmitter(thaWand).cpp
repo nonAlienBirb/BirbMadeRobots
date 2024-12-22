@@ -1,4 +1,5 @@
 #include <SPI.h>
+#include "printf.h"
 #include "RF24.h"
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
@@ -41,7 +42,7 @@ void setAndCheckMPU() {
   digitalWrite(ledCheckPin, HIGH);
   delay(200);
   digitalWrite(ledCheckPin, LOW);
-
+  delay(200);
   mpu.setAccelerometerRange(MPU6050_RANGE_16_G);
   mpu.setGyroRange(MPU6050_RANGE_500_DEG);
   mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
