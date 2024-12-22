@@ -1,10 +1,16 @@
 #include <SPI.h>
+#include <printf.h>
 #include <RF24.h>
+#include <SoftwareSerial.h>
 
 #define CE_PIN 7
 #define CSN_PIN 8
 
 #define ledCheckPin 13
+
+#define OutPutPin A0
+
+SoftwareSerial mySerial(2, 3);
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -14,8 +20,7 @@ bool radioNumber = 0;
 
 int payload[3] = { 0 };
 
-void setup() {
-  Serial.begin(115200);
+void setRF() {
   if (!radio.begin()) {
     Serial.println(F("radio hardware is not responding!!"));
     while (1) {
@@ -45,6 +50,13 @@ void setup() {
   radio.startListening();
 }
 
+void setup() {
+  Serial.begin(115200);
+  mySerial.begin(9600);
+
+  pinMode(OutPutPin, OUTPUT);
+}
+
 void loop() {
   uint8_t pipe;
   if (radio.available(&pipe)) {
@@ -57,6 +69,8 @@ void loop() {
     Serial.print(payload[1]);
     Serial.print("  mod : ");
     Serial.println(payload[2]);
+
+    mySerial.println(payload[0]);
   }
   delay(50);
 }
